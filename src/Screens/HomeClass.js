@@ -370,11 +370,11 @@ class HomeClass extends Component {
     );
   }
 }
-// function mapStateToProps(state) {
-//   return {wishlist: state.wishBasket};
-// }
+function mapStateToProps(state) {
+  return {wishlist: state.Reducers2.wishBasket};
+}
 
-export default connect(null, {
+export default connect(mapStateToProps, {
   addItemToCart,
   addItemToWishlist,
   removeFromWishlist,

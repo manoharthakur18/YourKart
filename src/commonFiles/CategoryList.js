@@ -1,15 +1,29 @@
 import {View, Text, TouchableOpacity, FlatList, Image} from 'react-native';
 import React, {useRef, useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   addItemToCart,
   addItemToWishlist,
   quantityChange,
+  removeFromWishlist,
 } from '../Screens/redux/actions/Actions';
 import {Modal} from 'react-native';
 
-const CategoryItemCard = ({item, onAddToCart, onAddToWishlist}) => {
+const CategoryItemCard = ({
+  item,
+  onAddToCart,
+  onAddToWishlist,
+  onRemoveItem,
+}) => {
+  const wishlist = useSelector(state => state.Reducers2.wishBasket);
+
+  let addedToWish = false;
+  wishlist.forEach(ele => {
+    if (item.key == ele.key) {
+      addedToWish = true;
+    }
+  });
   return (
     <View
       style={{
@@ -79,12 +93,19 @@ const CategoryItemCard = ({item, onAddToCart, onAddToWishlist}) => {
           alignItems: 'center',
         }}
         onPress={() => {
-          onAddToWishlist(item);
+          addedToWish ? onRemoveItem() : onAddToWishlist(item);
         }}>
-        <Image
-          source={require('../images/addwishlist.png')}
-          style={{width: 24, height: 24}}
-        />
+        {addedToWish ? (
+          <Image
+            source={require('../images/like.png')}
+            style={{width: 24, height: 24, tintColor: 'red'}}
+          />
+        ) : (
+          <Image
+            source={require('../images/addwishlist.png')}
+            style={{width: 24, height: 24}}
+          />
+        )}
       </TouchableOpacity>
     </View>
   );
@@ -147,6 +168,9 @@ const CategoryList = () => {
                 }}
                 onAddToWishlist={x => {
                   dispatch(addItemToWishlist(x));
+                }}
+                onRemoveItem={x => {
+                  dispatch(removeFromWishlist(item.key));
                 }}
               />
             </TouchableOpacity>

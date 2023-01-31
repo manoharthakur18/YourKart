@@ -7,12 +7,21 @@ import {
   addItemToCart,
   addItemToWishlist,
   quantityChange,
+  removeFromWishlist,
 } from '../Screens/redux/actions/Actions';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 const ProductDetails = () => {
   const route = useRoute();
   const dispatch = useDispatch();
+  const wishlist = useSelector(state => state.Reducers2.wishBasket);
+
+  let addedToWish = false;
+  wishlist.forEach(ele => {
+    if (route.params.items.key == ele.key) {
+      addedToWish = true;
+    }
+  });
 
   return (
     <ScrollView>
@@ -116,12 +125,21 @@ const ProductDetails = () => {
             alignItems: 'center',
           }}
           onPress={() => {
-            dispatch(addItemToWishlist(route.params.items));
+            addedToWish
+              ? dispatch(removeFromWishlist(route.params.items.key))
+              : dispatch(addItemToWishlist(route.params.items));
           }}>
-          <Image
-            source={require('../images/addwishlist.png')}
-            style={{width: 35, height: 35}}
-          />
+          {addedToWish ? (
+            <Image
+              source={require('../images/like.png')}
+              style={{width: 24, height: 24, tintColor: 'red'}}
+            />
+          ) : (
+            <Image
+              source={require('../images/addwishlist.png')}
+              style={{width: 24, height: 24}}
+            />
+          )}
         </TouchableOpacity>
       </View>
     </ScrollView>

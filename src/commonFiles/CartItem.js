@@ -1,8 +1,23 @@
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
+import {useSelector} from 'react-redux';
 
-const CartItem = ({item, onRemoveItem, onAddToWishlist, onQuantityChange}) => {
+const CartItem = ({
+  item,
+  onRemoveItem,
+  onRemoveItemFromWish,
+  onAddToWishlist,
+  onQuantityChange,
+}) => {
   const [count, setCount] = useState(1);
+  const wishlist = useSelector(state => state.Reducers2.wishBasket);
+
+  let addedToWish = false;
+  wishlist.forEach(ele => {
+    if (item.key == ele.key) {
+      addedToWish = true;
+    }
+  });
 
   return (
     <View
@@ -115,12 +130,19 @@ const CartItem = ({item, onRemoveItem, onAddToWishlist, onQuantityChange}) => {
           alignItems: 'center',
         }}
         onPress={() => {
-          onAddToWishlist(item);
+          addedToWish ? onRemoveItemFromWish() : onAddToWishlist(item);
         }}>
-        <Image
-          source={require('../images/addwishlist.png')}
-          style={{width: 24, height: 24}}
-        />
+        {addedToWish ? (
+          <Image
+            source={require('../images/like.png')}
+            style={{width: 24, height: 24, tintColor: 'red'}}
+          />
+        ) : (
+          <Image
+            source={require('../images/addwishlist.png')}
+            style={{width: 24, height: 24}}
+          />
+        )}
       </TouchableOpacity>
     </View>
   );

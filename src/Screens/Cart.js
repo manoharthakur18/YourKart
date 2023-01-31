@@ -6,6 +6,7 @@ import {
   removeFromCart,
   addItemToWishlist,
   quantityChange,
+  removeFromWishlist,
 } from './redux/actions/Actions';
 import CommonButton from '../commonFiles/CommonButton';
 
@@ -39,6 +40,9 @@ class Cart extends Component {
                 onQuantityChange={count => {
                   this.props.quantityChange({...item, qty: count});
                 }}
+                onRemoveItemFromWish={x => {
+                  this.props.removeFromWishlist(item.key);
+                }}
               />
             );
           }}
@@ -71,6 +75,7 @@ export default connect(mapStateToProps, {
   removeFromCart,
   addItemToWishlist,
   quantityChange,
+  removeFromWishlist,
 })(Cart);
 // const Cart = () => {
 //   const navigation = useNavigation();

@@ -1,6 +1,7 @@
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
+import {useSelector} from 'react-redux';
 
 const ProductItemCard = ({
   item,
@@ -8,9 +9,17 @@ const ProductItemCard = ({
   onRemoveItem,
   onAddToWishlist,
 }) => {
-  const [addedToWish, setAddedToWish] = useState(false);
-  const [addedToCart, setAddedToCart] = useState(false);
+  // const [addedToWish, setAddedToWish] = useState(false);
+  // const [addedToCart, setAddedToCart] = useState(false);
   const navigation = useNavigation();
+  const wishlist = useSelector(state => state.Reducers2.wishBasket);
+
+  let addedToWish = false;
+  wishlist.forEach(ele => {
+    if (item.key == ele.key) {
+      addedToWish = true;
+    }
+  });
   return (
     <View
       style={{
@@ -52,7 +61,7 @@ const ProductItemCard = ({
         <Text style={{fontSize: 18, fontWeight: '800'}}>
           {'₹' + item.price}
         </Text>
-        {addedToCart ? (
+        {/* {addedToCart ? (
           <TouchableOpacity
             style={{
               borderRadius: 10,
@@ -67,23 +76,23 @@ const ProductItemCard = ({
             }}>
             <Text>Go to Cart</Text>
           </TouchableOpacity>
-        ) : (
-          <TouchableOpacity
-            style={{
-              borderRadius: 10,
-              borderWidth: 1,
-              paddingLeft: 10,
-              paddingRight: 10,
-              paddingBottom: 5,
-              paddingTop: 5,
-            }}
-            onPress={() => {
-              onAddToCart(item);
-              setAddedToCart(true);
-            }}>
-            <Text>Add to Cart</Text>
-          </TouchableOpacity>
-        )}
+        ) : ( */}
+        <TouchableOpacity
+          style={{
+            borderRadius: 10,
+            borderWidth: 1,
+            paddingLeft: 10,
+            paddingRight: 10,
+            paddingBottom: 5,
+            paddingTop: 5,
+          }}
+          onPress={() => {
+            onAddToCart(item);
+            // setAddedToCart(true);
+          }}>
+          <Text>Add to Cart</Text>
+        </TouchableOpacity>
+        {/* )} */}
       </View>
       <TouchableOpacity
         style={{
@@ -100,7 +109,7 @@ const ProductItemCard = ({
         }}
         onPress={() => {
           addedToWish ? onRemoveItem() : onAddToWishlist(item);
-          setAddedToWish(!addedToWish);
+          // setAddedToWish(!addedToWish);
         }}>
         {addedToWish ? (
           <Image
