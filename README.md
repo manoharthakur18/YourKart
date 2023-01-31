@@ -22,7 +22,7 @@ Run ```npm i``` or ```npm install``` for node modules installation
 
 Run ```npx react-natvie run-android``` for android device
 
-### Screenshot of application 
+### Screenshot
 .
 <img src="https://user-images.githubusercontent.com/84763123/215700656-0dbd0ab2-32e5-4df9-bd94-a65f18b3c992.png" alt="Signup" width="250"/>
 <img src="https://user-images.githubusercontent.com/84763123/215700652-2a993789-21c2-42dc-b8dc-f28f0ac5ec3b.png" alt="Login" width="250"/>
@@ -40,6 +40,3 @@ Run ```npx react-natvie run-android``` for android device
 <img src="https://user-images.githubusercontent.com/84763123/215700623-f5150365-52e6-4b0b-93c8-fb6a88c0a6da.png" alt="Add Address" width="250"/>
 <img src="https://user-images.githubusercontent.com/84763123/215700629-bad7c8f2-7b5b-414b-a17e-1c8aed727c8f.png" alt="Order" width="250"/>
 <img src="https://user-images.githubusercontent.com/84763123/215700664-4a827ba5-04c7-410e-9442-309d88763488.png" alt="Order Status" width="250"/>
-
-![profile2](https://user-images.githubusercontent.com/84763123/215723397-742d1e5d-69f0-48e5-9092-9dd4ffc3685b.png = 250)
-![editprofile](https://user-images.githubusercontent.com/84763123/215723417-138e1016-f143-455e-bd1d-f71557e1c1e4.png = 250)
