@@ -34,10 +34,12 @@ Run ```npx react-natvie run-android``` for android device
 <img src="https://user-images.githubusercontent.com/84763123/215700612-e5911ce6-74bc-4052-9cf4-7a9defeaf3a1.png" alt="Cart" width="250"/>
 <img src="https://user-images.githubusercontent.com/84763123/215700621-fdbb526c-3037-46e6-b39d-abae343dac36.png" alt="Wishlist" width="250"/>
 <img src="https://user-images.githubusercontent.com/84763123/215700660-456cfeb6-3f6d-4ff8-a624-3205bbdfb4b3.png" alt="Checkout" width="250"/>
-<img src="https://user-images.githubusercontent.com/84763123/215700679-47053372-3e88-4b48-bfc9-daaea36ac391.png" alt="Profile" width="250"/>
-<img src="https://user-images.githubusercontent.com/84763123/215700678-b0dc5496-dd05-40e3-81d9-93ecad854361.png" alt="Edit profile" width="250"/>
+<img src="https://user-images.githubusercontent.com/84763123/215723397-742d1e5d-69f0-48e5-9092-9dd4ffc3685b.png" alt="Profile" width="250"/>
+<img src="https://user-images.githubusercontent.com/84763123/215723417-138e1016-f143-455e-bd1d-f71557e1c1e4.png" alt="Edit profile" width="250"/>
 <img src="https://user-images.githubusercontent.com/84763123/215700675-538aa0c0-3556-4885-a5dc-eaac8e009e07.png" alt="Address" width="250"/>
 <img src="https://user-images.githubusercontent.com/84763123/215700623-f5150365-52e6-4b0b-93c8-fb6a88c0a6da.png" alt="Add Address" width="250"/>
 <img src="https://user-images.githubusercontent.com/84763123/215700629-bad7c8f2-7b5b-414b-a17e-1c8aed727c8f.png" alt="Order" width="250"/>
 <img src="https://user-images.githubusercontent.com/84763123/215700664-4a827ba5-04c7-410e-9442-309d88763488.png" alt="Order Status" width="250"/>
 
+![profile2](https://user-images.githubusercontent.com/84763123/215723397-742d1e5d-69f0-48e5-9092-9dd4ffc3685b.png = 250)
+![editprofile](https://user-images.githubusercontent.com/84763123/215723417-138e1016-f143-455e-bd1d-f71557e1c1e4.png = 250)
