@@ -17,7 +17,15 @@ const CategoryItemCard = ({
   onRemoveItem,
 }) => {
   const wishlist = useSelector(state => state.Reducers2.wishBasket);
+  const cartlist = useSelector(state => state.Reducers.cartBasket);
+  const navigation = useNavigation();
 
+  let addedToCart = false;
+  cartlist.forEach(ele => {
+    if (item.key == ele.key) {
+      addedToCart = true;
+    }
+  });
   let addedToWish = false;
   wishlist.forEach(ele => {
     if (item.key == ele.key) {
@@ -64,20 +72,38 @@ const CategoryItemCard = ({
         <Text style={{fontSize: 18, fontWeight: '800'}}>
           {'₹' + item.price}
         </Text>
-        <TouchableOpacity
-          style={{
-            borderRadius: 10,
-            borderWidth: 1,
-            paddingLeft: 5,
-            paddingRight: 5,
-            paddingBottom: 5,
-            paddingTop: 5,
-          }}
-          onPress={() => {
-            onAddToCart(item);
-          }}>
-          <Text>Add to Cart</Text>
-        </TouchableOpacity>
+        {addedToCart ? (
+          <TouchableOpacity
+            style={{
+              borderRadius: 10,
+              borderWidth: 1,
+              paddingLeft: 10,
+              paddingRight: 10,
+              paddingBottom: 5,
+              paddingTop: 5,
+            }}
+            onPress={() => {
+              navigation.navigate('Cartlist', {screen: 'Cart'});
+            }}>
+            <Text>Go to Cart</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            style={{
+              borderRadius: 10,
+              borderWidth: 1,
+              paddingLeft: 10,
+              paddingRight: 10,
+              paddingBottom: 5,
+              paddingTop: 5,
+            }}
+            onPress={() => {
+              onAddToCart(item);
+              // setAddedToCart(true);
+            }}>
+            <Text>Add to Cart</Text>
+          </TouchableOpacity>
+        )}
       </View>
       <TouchableOpacity
         style={{

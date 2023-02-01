@@ -1,6 +1,6 @@
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
-import {useRoute} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {AirbnbRating} from '@rneui/themed';
 import {ScrollView} from 'react-native';
 import {
@@ -13,8 +13,17 @@ import {useDispatch, useSelector} from 'react-redux';
 
 const ProductDetails = () => {
   const route = useRoute();
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   const wishlist = useSelector(state => state.Reducers2.wishBasket);
+  const cartlist = useSelector(state => state.Reducers.cartBasket);
+
+  let addedToCart = false;
+  cartlist.forEach(ele => {
+    if (route.params.items.key == ele.key) {
+      addedToCart = true;
+    }
+  });
 
   let addedToWish = false;
   wishlist.forEach(ele => {
@@ -95,21 +104,39 @@ const ProductDetails = () => {
             size={30}
             showRating={false}
           />
-          <TouchableOpacity
-            style={{
-              borderRadius: 10,
-              borderWidth: 1,
-              paddingLeft: 10,
-              paddingRight: 10,
-              paddingBottom: 5,
-              paddingTop: 5,
-            }}
-            onPress={() => {
-              dispatch(addItemToCart(route.params.items));
-              dispatch(quantityChange({...route.params.items, qty: 1}));
-            }}>
-            <Text style={{fontSize: 20}}>Add to Cart</Text>
-          </TouchableOpacity>
+          {addedToCart ? (
+            <TouchableOpacity
+              style={{
+                borderRadius: 10,
+                borderWidth: 1,
+                paddingLeft: 10,
+                paddingRight: 10,
+                paddingBottom: 5,
+                paddingTop: 5,
+              }}
+              onPress={() => {
+                navigation.navigate('Cartlist', {screen: 'Cart'});
+              }}>
+              <Text>Go to Cart</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              style={{
+                borderRadius: 10,
+                borderWidth: 1,
+                paddingLeft: 10,
+                paddingRight: 10,
+                paddingBottom: 5,
+                paddingTop: 5,
+              }}
+              onPress={() => {
+                dispatch(addItemToCart(route.params.items));
+                dispatch(quantityChange({...route.params.items, qty: 1}));
+                // setAddedToCart(true);
+              }}>
+              <Text>Add to Cart</Text>
+            </TouchableOpacity>
+          )}
         </View>
         <TouchableOpacity
           style={{

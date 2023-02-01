@@ -9,6 +9,7 @@ import {
   removeFromWishlist,
 } from './redux/actions/Actions';
 import CommonButton from '../commonFiles/CommonButton';
+import {TouchableOpacity} from 'react-native';
 
 class Cart extends Component {
   render() {
@@ -29,21 +30,28 @@ class Cart extends Component {
           contentContainerStyle={{paddingBottom: 110}}
           renderItem={({item, index}) => {
             return (
-              <CartItem
-                item={item}
-                onRemoveItem={() => {
-                  this.props.removeFromCart(index);
-                }}
-                onAddToWishlist={x => {
-                  this.props.addItemToWishlist(x);
-                }}
-                onQuantityChange={count => {
-                  this.props.quantityChange({...item, qty: count});
-                }}
-                onRemoveItemFromWish={x => {
-                  this.props.removeFromWishlist(item.key);
-                }}
-              />
+              <TouchableOpacity
+                onPress={() => {
+                  this.props.navigation.navigate('ProductDetails', {
+                    items: item,
+                  });
+                }}>
+                <CartItem
+                  item={item}
+                  onRemoveItem={() => {
+                    this.props.removeFromCart(index);
+                  }}
+                  onAddToWishlist={x => {
+                    this.props.addItemToWishlist(x);
+                  }}
+                  onQuantityChange={count => {
+                    this.props.quantityChange({...item, qty: count});
+                  }}
+                  onRemoveItemFromWish={x => {
+                    this.props.removeFromWishlist(item.key);
+                  }}
+                />
+              </TouchableOpacity>
             );
           }}
         />

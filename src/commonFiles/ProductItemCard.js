@@ -13,11 +13,18 @@ const ProductItemCard = ({
   // const [addedToCart, setAddedToCart] = useState(false);
   const navigation = useNavigation();
   const wishlist = useSelector(state => state.Reducers2.wishBasket);
+  const cartlist = useSelector(state => state.Reducers.cartBasket);
 
   let addedToWish = false;
   wishlist.forEach(ele => {
     if (item.key == ele.key) {
       addedToWish = true;
+    }
+  });
+  let addedToCart = false;
+  cartlist.forEach(ele => {
+    if (item.key == ele.key) {
+      addedToCart = true;
     }
   });
   return (
@@ -61,7 +68,7 @@ const ProductItemCard = ({
         <Text style={{fontSize: 18, fontWeight: '800'}}>
           {'₹' + item.price}
         </Text>
-        {/* {addedToCart ? (
+        {addedToCart ? (
           <TouchableOpacity
             style={{
               borderRadius: 10,
@@ -76,23 +83,23 @@ const ProductItemCard = ({
             }}>
             <Text>Go to Cart</Text>
           </TouchableOpacity>
-        ) : ( */}
-        <TouchableOpacity
-          style={{
-            borderRadius: 10,
-            borderWidth: 1,
-            paddingLeft: 10,
-            paddingRight: 10,
-            paddingBottom: 5,
-            paddingTop: 5,
-          }}
-          onPress={() => {
-            onAddToCart(item);
-            // setAddedToCart(true);
-          }}>
-          <Text>Add to Cart</Text>
-        </TouchableOpacity>
-        {/* )} */}
+        ) : (
+          <TouchableOpacity
+            style={{
+              borderRadius: 10,
+              borderWidth: 1,
+              paddingLeft: 10,
+              paddingRight: 10,
+              paddingBottom: 5,
+              paddingTop: 5,
+            }}
+            onPress={() => {
+              onAddToCart(item);
+              // setAddedToCart(true);
+            }}>
+            <Text>Add to Cart</Text>
+          </TouchableOpacity>
+        )}
       </View>
       <TouchableOpacity
         style={{
@@ -109,7 +116,6 @@ const ProductItemCard = ({
         }}
         onPress={() => {
           addedToWish ? onRemoveItem() : onAddToWishlist(item);
-          // setAddedToWish(!addedToWish);
         }}>
         {addedToWish ? (
           <Image
