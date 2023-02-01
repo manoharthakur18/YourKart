@@ -8,8 +8,8 @@ import Loader from '../commonFiles/Loader';
 
 const EditProfile = () => {
   const routes = useRoute();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState(routes.params.name);
+  const [email, setEmail] = useState(routes.params.email);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
@@ -18,7 +18,9 @@ const EditProfile = () => {
   const updateProfile = async (name, password) => {
     setModalVisible(true);
     await update(name);
-    await changePassword(password);
+    if (password !== '') {
+      await changePassword(password);
+    }
     await changeEmail(email);
     navigation.goBack();
     setModalVisible(false);
@@ -27,7 +29,7 @@ const EditProfile = () => {
   return (
     <View>
       <CustomTextInput
-        placeholder={routes.params.name}
+        placeholder={name}
         value={name}
         onChangeText={txt => {
           setName(txt);
@@ -35,7 +37,7 @@ const EditProfile = () => {
         icon={require('../images/user.png')}
       />
       <CustomTextInput
-        placeholder={routes.params.email}
+        placeholder={email}
         value={email}
         onChangeText={txt => {
           setEmail(txt);
@@ -72,11 +74,12 @@ const EditProfile = () => {
         textColor={'#fff'}
         onPress={() => {
           if (
-            name !== '' &&
-            password !== confirmPassword &&
-            email == /^[w-.]+@([w-]+.)+[w-]{2,4}$/
+            name == '' ||
+            password !== confirmPassword ||
+            password == '' ||
+            !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
           ) {
-            alert('Please enter valid name and password');
+            alert('Please enter valid name, email and password');
           } else {
             updateProfile(name, password, email);
           }

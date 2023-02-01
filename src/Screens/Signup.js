@@ -4,7 +4,6 @@ import {
   Image,
   ScrollView,
   StyleSheet,
-  TouchableHighlight,
   ToastAndroid,
   Alert,
 } from 'react-native';
@@ -70,15 +69,12 @@ const Signup = () => {
           // For instance, get the download URL: https://firebasestorage.googleapis.com/...
           uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
             setPic(downloadURL);
-            register(email, password, name, mobile, downloadURL);
-            setModalVisible(false);
+            register(email, password, name, mobile, downloadURL).then(() => {
+              setModalVisible(false);
+            });
           });
         },
       );
-
-      // setTimeout(() => {
-      //   register(email, password, name, mobile);
-      // }, 2000);
     }
   };
 
@@ -203,11 +199,18 @@ const Signup = () => {
               Remove Image
             </Button>
           </View>
-          <TouchableHighlight
-            underlayColor="rgba(0,0,0,0)"
-            style={{alignSelf: 'center'}}>
+          {pic == null ? (
+            <Image
+              source={require('../images/user.png')}
+              style={{
+                width: 100,
+                height: 100,
+                alignSelf: 'center',
+              }}
+            />
+          ) : (
             <Avatar.Image size={150} source={{uri: pic}} />
-          </TouchableHighlight>
+          )}
         </View>
         <CustomTextInput
           placeholder={'Name'}

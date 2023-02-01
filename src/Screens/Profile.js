@@ -2,9 +2,28 @@ import {View, Text, Image, ScrollView, TouchableOpacity} from 'react-native';
 import React, {useContext, Component} from 'react';
 import {AuthContext} from '../authentication/AuthProvider';
 import CommonButton from '../commonFiles/CommonButton';
+import {firebase} from '@react-native-firebase/firestore';
 
 export default class Profile extends Component {
   static contextType = AuthContext;
+  constructor() {
+    super();
+    this.state = {
+      newData: [],
+    };
+  }
+  componentDidMount() {
+    firebase
+      .firestore()
+      .collection('Users')
+      .doc('btG9hNRoFvf5kOvxgB5A')
+      .get()
+      .then(snapshot => {
+        this.setState({newData: snapshot.data()});
+        console.log(this.state.newData);
+      });
+  }
+
   render() {
     return (
       <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
@@ -68,7 +87,8 @@ export default class Profile extends Component {
               marginLeft: 20,
               color: '#000',
             }}>
-            {this.context.user.phoneNumber}
+            Phone:-
+            {this.state.newData ? this.state.newData['Phone no.'] : ''}
           </Text>
 
           <TouchableOpacity
